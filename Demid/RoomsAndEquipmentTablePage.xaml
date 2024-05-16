@@ -1,0 +1,75 @@
+﻿<Page x:Class="Demid.RoomsAndEquipmentTablePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Demid"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="RoomsAndEquipmentTablePage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                      MaxHeight="170">
+            <!-- DataGrid для отображения данных из базы данных -->
+            <DataGrid x:Name="RoomsAndEquipmentDataGrid" Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding}" SelectionChanged="RoomsAndEquipmentDataGrid_SelectionChanged">
+                <!-- Колонки DataGrid -->
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Идентификатор" Binding="{Binding Идентификатор}"/>
+                    <DataGridTextColumn Header="Номер помещения" Binding="{Binding Номер_помещения}"/>
+                    <DataGridTextColumn Header="Тип оборудования" Binding="{Binding Идентификатор_оборудования}"/>
+                    <DataGridTextColumn Header="Состояние" Binding="{Binding Состояние}"/>
+                    <DataGridTextColumn Header="Дата установки" Binding="{Binding Дата_установки}"/>
+                    <DataGridTextColumn Header="Описание" Binding="{Binding Описание}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+        <!-- Блоки для ввода новых данных -->
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
+            <TextBox x:Name="RoomNumberTextBox" Margin="0 5" Text="Номер помещения"/>
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Orientation="Horizontal">
+                <TextBlock Text="Оборудование" VerticalAlignment="Center" HorizontalAlignment="Center" Width="84"/>
+                <ComboBox x:Name="EquipmentTypeComboBox" Margin="0 5" Width="694" DisplayMemberPath="Название" SelectedValuePath="Идентификатор"/>
+            </StackPanel>
+            
+            <TextBox x:Name="StateTextBox" Margin="0 5" Text="Состояние"/>
+            <TextBox x:Name="InstallationDateTextBox" Margin="0 5" Text="Дата установки"/>
+            <TextBox x:Name="DescriptionTextBox" Margin="0 5" Text="Описание"/>
+            <!-- Кнопка для добавления новой записи -->
+            
+    
+
+        <!-- Блоки для изменения и удаления данных -->
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <Button Content="Добавить" Click="AddRoomAndEquipment_Click" Background="Green" Margin="0,5,5,5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="13"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Content="Изменить" Click="EditRoomAndEquipment_Click" Background="CadetBlue" Margin="0,5,5,5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="13"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Content="Удалить" Click="DeleteRoomAndEquipment_Click" Background="IndianRed" Margin="0,5,5,5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="13"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

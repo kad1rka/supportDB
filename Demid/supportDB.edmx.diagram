@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ae73cc4297c546659174b0a30abae529" Name="Diagram1">
+        <EntityTypeShape EntityType="supportDBModel.Журналы_логов" Width="1.5" PointX="8.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="supportDBModel.История_действий" Width="1.5" PointX="3" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="supportDBModel.Категории_проблем" Width="1.5" PointX="3.75" PointY="2.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="supportDBModel.Оборудование" Width="1.5" PointX="10.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="supportDBModel.Ответственные" Width="1.5" PointX="3.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="supportDBModel.Пользователи" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="supportDBModel.Помещения_и_оборудование" Width="1.5" PointX="13" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="supportDBModel.Решения" Width="1.5" PointX="8.25" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="supportDBModel.Статусы_тикетов" Width="1.5" PointX="8.25" PointY="8.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="supportDBModel.Тикеты" Width="1.5" PointX="6" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="supportDBModel.FK__Журналы_л__Идент__5812160E" ManuallyRouted="false" />
+        <AssociationConnector Association="supportDBModel.FK__История_д__Идент__5070F446" ManuallyRouted="false" />
+        <AssociationConnector Association="supportDBModel.FK__История_д__Идент__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="supportDBModel.FK_Тикеты_Категории_проблем" ManuallyRouted="false" />
+        <AssociationConnector Association="supportDBModel.FK_Помещения_и_оборудование_Оборудование" ManuallyRouted="false" />
+        <AssociationConnector Association="supportDBModel.FK_Тикеты_Ответственные" ManuallyRouted="false" />
+        <AssociationConnector Association="supportDBModel.FK__Тикеты__Идентифи__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="supportDBModel.FK__Решения__Идентиф__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="supportDBModel.FK__Статусы_т__Описа__5FB337D6" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

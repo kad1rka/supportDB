@@ -1,0 +1,48 @@
+﻿<Page x:Class="Demid.Report"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Demid"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Report">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="2*"/>
+            <RowDefinition Height="8*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="0">
+            <TextBlock Text="Приоритет:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="PriorityComboBox" SelectedIndex="0" SelectionChanged="PriorityComboBox_SelectionChanged" Margin="5" Height="24">
+                <ComboBoxItem Content="Высокий"/>
+                <ComboBoxItem Content="Средний"/>
+                <ComboBoxItem Content="Низкий"/>
+            </ComboBox>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="1">
+            <TextBlock Text="Статус:" VerticalAlignment="Center"/>
+            <ComboBox x:Name="StatusComboBox" SelectedIndex="0" SelectionChanged="StatusComboBox_SelectionChanged" Margin="5" Height="29">
+                <ComboBoxItem Content="Открыт"/>
+                <ComboBoxItem Content="В процессе"/>
+                <ComboBoxItem Content="Закрыт"/>
+            </ComboBox>
+        </StackPanel>
+
+        <DataGrid x:Name="TicketsDataGrid" AutoGenerateColumns="False" Margin="5" Grid.Row="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Идентификатор" Binding="{Binding Идентификатор}"/>
+                <DataGridTextColumn Header="Пользователь" Binding="{Binding Идентификатор_пользователя}"/>
+                <DataGridTextColumn Header="Тема" Binding="{Binding Тема}"/>
+                <DataGridTextColumn Header="Описание проблемы" Binding="{Binding Идентификатор_проблемы}"/>
+                <DataGridTextColumn Header="Статус" Binding="{Binding Статус}"/>
+                <DataGridTextColumn Header="Приоритет" Binding="{Binding Приоритет}"/>
+                <DataGridTextColumn Header="Дата создания" Binding="{Binding Дата_создания}"/>
+                <DataGridTextColumn Header="Дата обновления" Binding="{Binding Дата_обновления}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

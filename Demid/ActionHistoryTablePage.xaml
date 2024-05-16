@@ -1,0 +1,72 @@
+﻿<Page x:Class="Demid.ActionHistoryTablePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Demid"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ActionHistoryTablePage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                      MaxHeight="200">
+            <!-- DataGrid для отображения данных из базы данных -->
+            <DataGrid x:Name="ActionHistoryDataGrid" Grid.Row="0" AutoGenerateColumns="False" ItemsSource="{Binding}" SelectionChanged="ActionHistoryDataGrid_SelectionChanged">
+                <!-- Колонки DataGrid -->
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Идентификатор" Binding="{Binding Идентификатор}"/>
+                    <DataGridTextColumn Header="Идентификатор тикета" Binding="{Binding Идентификатор_тикета}"/>
+                    <DataGridTextColumn Header="Действие" Binding="{Binding Действие}"/>
+                    <DataGridTextColumn Header="Идентификатор пользователя" Binding="{Binding Идентификатор_пользователя}"/>
+                    <DataGridTextColumn Header="Дата и время" Binding="{Binding Дата_и_время}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+        <!-- Блоки для ввода новых данных -->
+        <StackPanel Grid.Row="1" Orientation="Vertical" Margin="10">
+            <TextBox x:Name="ActionTextBox" Margin="0 5" Text="Действие"/>
+            <StackPanel>
+
+                <TextBlock Text="Тикет"/>
+                <ComboBox x:Name="TicketComboBox" Margin="0 5" DisplayMemberPath="Тема" SelectedValuePath="Идентификатор"/>
+                <TextBlock Text="Пользователь"/>
+            <ComboBox x:Name="UserComboBox" Margin="0 5" DisplayMemberPath="FullName" SelectedValuePath="Идентификатор"/>
+            </StackPanel>
+           
+       
+
+        <!-- Блоки для изменения и удаления данных -->
+            <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <Button Content="Добавить" Click="AddAction_Click" Background="Green" Margin="0,5,5,5">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="13"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                <Button Content="Изменить" Click="EditAction_Click" Background="CadetBlue" Margin="0,5,5,5">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="13"/>
+                            </Style>
+                        </Button.Resources>
+                    </Button>
+                <Button Content="Удалить" Click="DeleteAction_Click" Background="IndianRed" Margin="0,5,5,5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="13"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

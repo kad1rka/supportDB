@@ -1,0 +1,67 @@
+﻿<Page x:Class="Demid.TicketStatusesTablePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:sys="clr-namespace:System;assembly=mscorlib"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="TicketStatusesTablePage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+
+
+        </Grid.RowDefinitions>
+
+        <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                      MaxHeight="200">
+            <!-- DataGrid для отображения данных из базы данных -->
+            <DataGrid x:Name="TicketStatusesDataGrid" AutoGenerateColumns="False" ItemsSource="{Binding}" SelectionChanged="TicketStatusesDataGrid_SelectionChanged">
+                <!-- Колонки DataGrid -->
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Идентификатор" Binding="{Binding Идентификатор}"/>
+                    <DataGridTextColumn Header="Идентификатор тикета" Binding="{Binding Идентификатор_тикета}"/>
+                    <DataGridTextColumn Header="Название" Binding="{Binding Название}"/>
+                    <DataGridTextColumn Header="Описание" Binding="{Binding Описание}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </ScrollViewer>
+
+        <!-- Блоки для ввода данных о статусе тикета -->
+        <StackPanel Grid.Row="2" Orientation="Vertical" Margin="10">
+            <!-- Комбобокс для выбора тикета -->
+            <TextBlock Text="Тикет" Width="745"/>
+            <ComboBox x:Name="TicketComboBox" Width="755" Grid.Row="0" Margin="10" DisplayMemberPath="Тема" SelectedValuePath="Идентификатор"/>
+
+            <TextBox x:Name="NameTextBox" Margin="0 5" Text="Название" Width="768"/>
+            <TextBox x:Name="DescriptionTextBox" Margin="0 5" Text="Описание" Width="768"/>
+            <!-- Кнопки для операций -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                <Button Content="Добавить" Click="AddTicketStatus_Click" Background="Green" Margin="0,5,5,5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="13"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Content="Изменить" Click="EditTicketStatus_Click" Background="CadetBlue" Margin="0,5,5,5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="13"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Content="Удалить" Click="DeleteTicketStatus_Click" Background="IndianRed" Margin="0,5,5,5">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="13"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Page>

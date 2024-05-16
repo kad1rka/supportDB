@@ -1,0 +1,688 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище supportDBModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Журналы_логов">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Идентификатор_тикета" Type="int" />
+          <Property Name="Содержание_лога" Type="text" />
+          <Property Name="Уровень_важности" Type="varchar" MaxLength="50" />
+          <Property Name="Дата_и_время" Type="datetime" />
+        </EntityType>
+        <EntityType Name="История_действий">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Идентификатор_тикета" Type="int" />
+          <Property Name="Действие" Type="varchar" MaxLength="100" />
+          <Property Name="Идентификатор_пользователя" Type="int" />
+          <Property Name="Дата_и_время" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Категории_проблем">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="varchar" MaxLength="100" />
+          <Property Name="Описание" Type="text" />
+        </EntityType>
+        <EntityType Name="Оборудование">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Название" Type="varchar" MaxLength="100" />
+          <Property Name="Серийный_номер" Type="varchar" MaxLength="50" />
+          <Property Name="Описание" Type="text" />
+          <Property Name="Дата_покупки" Type="date" />
+          <Property Name="Гарантийный_срок" Type="date" />
+        </EntityType>
+        <EntityType Name="Ответственные">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" />
+          <Property Name="Должность" Type="varchar" MaxLength="100" />
+          <Property Name="Контактная_информация" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Пользователи">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Имя" Type="varchar" MaxLength="50" />
+          <Property Name="Фамилия" Type="varchar" MaxLength="50" />
+          <Property Name="Должность" Type="varchar" MaxLength="100" />
+          <Property Name="Контактная_информация" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Помещения_и_оборудование">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Номер_помещения" Type="varchar" MaxLength="50" />
+          <Property Name="Идентификатор_оборудования" Type="int" />
+          <Property Name="Состояние" Type="varchar" MaxLength="50" />
+          <Property Name="Дата_установки" Type="datetime" />
+          <Property Name="Описание" Type="text" />
+        </EntityType>
+        <EntityType Name="Решения">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Идентификатор_тикета" Type="int" />
+          <Property Name="Описание_решения" Type="text" />
+          <Property Name="Дата_создания" Type="date" />
+        </EntityType>
+        <EntityType Name="Статусы_тикетов">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Идентификатор_тикета" Type="int" />
+          <Property Name="Название" Type="varchar" MaxLength="50" />
+          <Property Name="Описание" Type="text" />
+        </EntityType>
+        <EntityType Name="Тикеты">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Идентификатор_пользователя" Type="int" />
+          <Property Name="Тема" Type="varchar" MaxLength="255" />
+          <Property Name="Идентификатор_проблемы" Type="int" />
+          <Property Name="Статус" Type="varchar" MaxLength="50" />
+          <Property Name="Приоритет" Type="varchar" MaxLength="50" />
+          <Property Name="Дата_создания" Type="date" />
+          <Property Name="Дата_обновления" Type="date" />
+          <Property Name="Идентификатор_ответственного" Type="int" />
+        </EntityType>
+        <Association Name="FK__Журналы_л__Идент__5812160E">
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="0..1" />
+          <End Role="Журналы_логов" Type="Self.Журналы_логов" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тикеты">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Журналы_логов">
+              <PropertyRef Name="Идентификатор_тикета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__История_д__Идент__5070F446">
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="0..1" />
+          <End Role="История_действий" Type="Self.История_действий" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тикеты">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="История_действий">
+              <PropertyRef Name="Идентификатор_тикета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__История_д__Идент__5165187F">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
+          <End Role="История_действий" Type="Self.История_действий" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="История_действий">
+              <PropertyRef Name="Идентификатор_пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Решения__Идентиф__5AEE82B9">
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="0..1" />
+          <End Role="Решения" Type="Self.Решения" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тикеты">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Решения">
+              <PropertyRef Name="Идентификатор_тикета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Статусы_т__Описа__5FB337D6">
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="0..1" />
+          <End Role="Статусы_тикетов" Type="Self.Статусы_тикетов" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тикеты">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Статусы_тикетов">
+              <PropertyRef Name="Идентификатор_тикета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Тикеты__Идентифи__4BAC3F29">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Тикеты">
+              <PropertyRef Name="Идентификатор_пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Помещения_и_оборудование_Оборудование">
+          <End Role="Оборудование" Type="Self.Оборудование" Multiplicity="0..1" />
+          <End Role="Помещения_и_оборудование" Type="Self.Помещения_и_оборудование" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Оборудование">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Помещения_и_оборудование">
+              <PropertyRef Name="Идентификатор_оборудования" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Тикеты_Категории_проблем">
+          <End Role="Категории_проблем" Type="Self.Категории_проблем" Multiplicity="0..1" />
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Категории_проблем">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Тикеты">
+              <PropertyRef Name="Идентификатор_проблемы" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Тикеты_Ответственные">
+          <End Role="Ответственные" Type="Self.Ответственные" Multiplicity="0..1" />
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ответственные">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Тикеты">
+              <PropertyRef Name="Идентификатор_ответственного" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище supportDBModelContainer">
+          <EntitySet Name="Журналы_логов" EntityType="Self.Журналы_логов" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="История_действий" EntityType="Self.История_действий" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Категории_проблем" EntityType="Self.Категории_проблем" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Оборудование" EntityType="Self.Оборудование" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ответственные" EntityType="Self.Ответственные" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Помещения_и_оборудование" EntityType="Self.Помещения_и_оборудование" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Решения" EntityType="Self.Решения" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Статусы_тикетов" EntityType="Self.Статусы_тикетов" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Тикеты" EntityType="Self.Тикеты" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__Журналы_л__Идент__5812160E" Association="Self.FK__Журналы_л__Идент__5812160E">
+            <End Role="Тикеты" EntitySet="Тикеты" />
+            <End Role="Журналы_логов" EntitySet="Журналы_логов" />
+          </AssociationSet>
+          <AssociationSet Name="FK__История_д__Идент__5070F446" Association="Self.FK__История_д__Идент__5070F446">
+            <End Role="Тикеты" EntitySet="Тикеты" />
+            <End Role="История_действий" EntitySet="История_действий" />
+          </AssociationSet>
+          <AssociationSet Name="FK__История_д__Идент__5165187F" Association="Self.FK__История_д__Идент__5165187F">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="История_действий" EntitySet="История_действий" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Решения__Идентиф__5AEE82B9" Association="Self.FK__Решения__Идентиф__5AEE82B9">
+            <End Role="Тикеты" EntitySet="Тикеты" />
+            <End Role="Решения" EntitySet="Решения" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Статусы_т__Описа__5FB337D6" Association="Self.FK__Статусы_т__Описа__5FB337D6">
+            <End Role="Тикеты" EntitySet="Тикеты" />
+            <End Role="Статусы_тикетов" EntitySet="Статусы_тикетов" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Тикеты__Идентифи__4BAC3F29" Association="Self.FK__Тикеты__Идентифи__4BAC3F29">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Тикеты" EntitySet="Тикеты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Помещения_и_оборудование_Оборудование" Association="Self.FK_Помещения_и_оборудование_Оборудование">
+            <End Role="Оборудование" EntitySet="Оборудование" />
+            <End Role="Помещения_и_оборудование" EntitySet="Помещения_и_оборудование" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Тикеты_Категории_проблем" Association="Self.FK_Тикеты_Категории_проблем">
+            <End Role="Категории_проблем" EntitySet="Категории_проблем" />
+            <End Role="Тикеты" EntitySet="Тикеты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Тикеты_Ответственные" Association="Self.FK_Тикеты_Ответственные">
+            <End Role="Ответственные" EntitySet="Ответственные" />
+            <End Role="Тикеты" EntitySet="Тикеты" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="supportDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Журналы_логов">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Идентификатор_тикета" Type="Int32" />
+          <Property Name="Содержание_лога" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Уровень_важности" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_и_время" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Тикеты" Relationship="Self.FK__Журналы_л__Идент__5812160E" FromRole="Журналы_логов" ToRole="Тикеты" />
+        </EntityType>
+        <EntityType Name="История_действий">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Идентификатор_тикета" Type="Int32" />
+          <Property Name="Действие" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Идентификатор_пользователя" Type="Int32" />
+          <Property Name="Дата_и_время" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Тикеты" Relationship="Self.FK__История_д__Идент__5070F446" FromRole="История_действий" ToRole="Тикеты" />
+          <NavigationProperty Name="Пользователи" Relationship="Self.FK__История_д__Идент__5165187F" FromRole="История_действий" ToRole="Пользователи" />
+        </EntityType>
+        <EntityType Name="Категории_проблем">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Тикеты" Relationship="Self.FK_Тикеты_Категории_проблем" FromRole="Категории_проблем" ToRole="Тикеты" />
+        </EntityType>
+        <EntityType Name="Оборудование">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Название" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Серийный_номер" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_покупки" Type="DateTime" Precision="0" />
+          <Property Name="Гарантийный_срок" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Помещения_и_оборудование" Relationship="Self.FK_Помещения_и_оборудование_Оборудование" FromRole="Оборудование" ToRole="Помещения_и_оборудование" />
+        </EntityType>
+        <EntityType Name="Ответственные">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Должность" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Контактная_информация" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Тикеты" Relationship="Self.FK_Тикеты_Ответственные" FromRole="Ответственные" ToRole="Тикеты" />
+        </EntityType>
+        <EntityType Name="Пользователи">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Имя" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Фамилия" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Должность" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Контактная_информация" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="История_действий" Relationship="Self.FK__История_д__Идент__5165187F" FromRole="Пользователи" ToRole="История_действий" />
+          <NavigationProperty Name="Тикеты" Relationship="Self.FK__Тикеты__Идентифи__4BAC3F29" FromRole="Пользователи" ToRole="Тикеты" />
+        </EntityType>
+        <EntityType Name="Помещения_и_оборудование">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Номер_помещения" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Идентификатор_оборудования" Type="Int32" />
+          <Property Name="Состояние" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_установки" Type="DateTime" Precision="3" />
+          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Оборудование" Relationship="Self.FK_Помещения_и_оборудование_Оборудование" FromRole="Помещения_и_оборудование" ToRole="Оборудование" />
+        </EntityType>
+        <EntityType Name="Решения">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Идентификатор_тикета" Type="Int32" />
+          <Property Name="Описание_решения" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_создания" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Тикеты" Relationship="Self.FK__Решения__Идентиф__5AEE82B9" FromRole="Решения" ToRole="Тикеты" />
+        </EntityType>
+        <EntityType Name="Статусы_тикетов">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Идентификатор_тикета" Type="Int32" />
+          <Property Name="Название" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Описание" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Тикеты" Relationship="Self.FK__Статусы_т__Описа__5FB337D6" FromRole="Статусы_тикетов" ToRole="Тикеты" />
+        </EntityType>
+        <EntityType Name="Тикеты">
+          <Key>
+            <PropertyRef Name="Идентификатор" />
+          </Key>
+          <Property Name="Идентификатор" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Идентификатор_пользователя" Type="Int32" />
+          <Property Name="Тема" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Идентификатор_проблемы" Type="Int32" />
+          <Property Name="Статус" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Приоритет" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Дата_создания" Type="DateTime" Precision="0" />
+          <Property Name="Дата_обновления" Type="DateTime" Precision="0" />
+          <Property Name="Идентификатор_ответственного" Type="Int32" />
+          <NavigationProperty Name="Журналы_логов" Relationship="Self.FK__Журналы_л__Идент__5812160E" FromRole="Тикеты" ToRole="Журналы_логов" />
+          <NavigationProperty Name="История_действий" Relationship="Self.FK__История_д__Идент__5070F446" FromRole="Тикеты" ToRole="История_действий" />
+          <NavigationProperty Name="Категории_проблем" Relationship="Self.FK_Тикеты_Категории_проблем" FromRole="Тикеты" ToRole="Категории_проблем" />
+          <NavigationProperty Name="Ответственные" Relationship="Self.FK_Тикеты_Ответственные" FromRole="Тикеты" ToRole="Ответственные" />
+          <NavigationProperty Name="Пользователи" Relationship="Self.FK__Тикеты__Идентифи__4BAC3F29" FromRole="Тикеты" ToRole="Пользователи" />
+          <NavigationProperty Name="Решения" Relationship="Self.FK__Решения__Идентиф__5AEE82B9" FromRole="Тикеты" ToRole="Решения" />
+          <NavigationProperty Name="Статусы_тикетов" Relationship="Self.FK__Статусы_т__Описа__5FB337D6" FromRole="Тикеты" ToRole="Статусы_тикетов" />
+        </EntityType>
+        <Association Name="FK__Журналы_л__Идент__5812160E">
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="0..1" />
+          <End Role="Журналы_логов" Type="Self.Журналы_логов" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тикеты">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Журналы_логов">
+              <PropertyRef Name="Идентификатор_тикета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__История_д__Идент__5070F446">
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="0..1" />
+          <End Role="История_действий" Type="Self.История_действий" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тикеты">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="История_действий">
+              <PropertyRef Name="Идентификатор_тикета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__История_д__Идент__5165187F">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
+          <End Role="История_действий" Type="Self.История_действий" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="История_действий">
+              <PropertyRef Name="Идентификатор_пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Тикеты_Категории_проблем">
+          <End Role="Категории_проблем" Type="Self.Категории_проблем" Multiplicity="0..1" />
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Категории_проблем">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Тикеты">
+              <PropertyRef Name="Идентификатор_проблемы" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Помещения_и_оборудование_Оборудование">
+          <End Role="Оборудование" Type="Self.Оборудование" Multiplicity="0..1" />
+          <End Role="Помещения_и_оборудование" Type="Self.Помещения_и_оборудование" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Оборудование">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Помещения_и_оборудование">
+              <PropertyRef Name="Идентификатор_оборудования" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Тикеты_Ответственные">
+          <End Role="Ответственные" Type="Self.Ответственные" Multiplicity="0..1" />
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ответственные">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Тикеты">
+              <PropertyRef Name="Идентификатор_ответственного" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Тикеты__Идентифи__4BAC3F29">
+          <End Role="Пользователи" Type="Self.Пользователи" Multiplicity="0..1" />
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Пользователи">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Тикеты">
+              <PropertyRef Name="Идентификатор_пользователя" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Решения__Идентиф__5AEE82B9">
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="0..1" />
+          <End Role="Решения" Type="Self.Решения" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тикеты">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Решения">
+              <PropertyRef Name="Идентификатор_тикета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Статусы_т__Описа__5FB337D6">
+          <End Role="Тикеты" Type="Self.Тикеты" Multiplicity="0..1" />
+          <End Role="Статусы_тикетов" Type="Self.Статусы_тикетов" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Тикеты">
+              <PropertyRef Name="Идентификатор" />
+            </Principal>
+            <Dependent Role="Статусы_тикетов">
+              <PropertyRef Name="Идентификатор_тикета" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="supportDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Журналы_логов" EntityType="Self.Журналы_логов" />
+          <EntitySet Name="История_действий" EntityType="Self.История_действий" />
+          <EntitySet Name="Категории_проблем" EntityType="Self.Категории_проблем" />
+          <EntitySet Name="Оборудование" EntityType="Self.Оборудование" />
+          <EntitySet Name="Ответственные" EntityType="Self.Ответственные" />
+          <EntitySet Name="Пользователи" EntityType="Self.Пользователи" />
+          <EntitySet Name="Помещения_и_оборудование" EntityType="Self.Помещения_и_оборудование" />
+          <EntitySet Name="Решения" EntityType="Self.Решения" />
+          <EntitySet Name="Статусы_тикетов" EntityType="Self.Статусы_тикетов" />
+          <EntitySet Name="Тикеты" EntityType="Self.Тикеты" />
+          <AssociationSet Name="FK__Журналы_л__Идент__5812160E" Association="Self.FK__Журналы_л__Идент__5812160E">
+            <End Role="Тикеты" EntitySet="Тикеты" />
+            <End Role="Журналы_логов" EntitySet="Журналы_логов" />
+          </AssociationSet>
+          <AssociationSet Name="FK__История_д__Идент__5070F446" Association="Self.FK__История_д__Идент__5070F446">
+            <End Role="Тикеты" EntitySet="Тикеты" />
+            <End Role="История_действий" EntitySet="История_действий" />
+          </AssociationSet>
+          <AssociationSet Name="FK__История_д__Идент__5165187F" Association="Self.FK__История_д__Идент__5165187F">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="История_действий" EntitySet="История_действий" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Тикеты_Категории_проблем" Association="Self.FK_Тикеты_Категории_проблем">
+            <End Role="Категории_проблем" EntitySet="Категории_проблем" />
+            <End Role="Тикеты" EntitySet="Тикеты" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Помещения_и_оборудование_Оборудование" Association="Self.FK_Помещения_и_оборудование_Оборудование">
+            <End Role="Оборудование" EntitySet="Оборудование" />
+            <End Role="Помещения_и_оборудование" EntitySet="Помещения_и_оборудование" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Тикеты_Ответственные" Association="Self.FK_Тикеты_Ответственные">
+            <End Role="Ответственные" EntitySet="Ответственные" />
+            <End Role="Тикеты" EntitySet="Тикеты" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Тикеты__Идентифи__4BAC3F29" Association="Self.FK__Тикеты__Идентифи__4BAC3F29">
+            <End Role="Пользователи" EntitySet="Пользователи" />
+            <End Role="Тикеты" EntitySet="Тикеты" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Решения__Идентиф__5AEE82B9" Association="Self.FK__Решения__Идентиф__5AEE82B9">
+            <End Role="Тикеты" EntitySet="Тикеты" />
+            <End Role="Решения" EntitySet="Решения" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Статусы_т__Описа__5FB337D6" Association="Self.FK__Статусы_т__Описа__5FB337D6">
+            <End Role="Тикеты" EntitySet="Тикеты" />
+            <End Role="Статусы_тикетов" EntitySet="Статусы_тикетов" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище supportDBModelContainer" CdmEntityContainer="supportDBEntities">
+          <EntitySetMapping Name="Журналы_логов">
+            <EntityTypeMapping TypeName="supportDBModel.Журналы_логов">
+              <MappingFragment StoreEntitySet="Журналы_логов">
+                <ScalarProperty Name="Идентификатор" ColumnName="Идентификатор" />
+                <ScalarProperty Name="Идентификатор_тикета" ColumnName="Идентификатор_тикета" />
+                <ScalarProperty Name="Содержание_лога" ColumnName="Содержание_лога" />
+                <ScalarProperty Name="Уровень_важности" ColumnName="Уровень_важности" />
+                <ScalarProperty Name="Дата_и_время" ColumnName="Дата_и_время" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="История_действий">
+            <EntityTypeMapping TypeName="supportDBModel.История_действий">
+              <MappingFragment StoreEntitySet="История_действий">
+                <ScalarProperty Name="Идентификатор" ColumnName="Идентификатор" />
+                <ScalarProperty Name="Идентификатор_тикета" ColumnName="Идентификатор_тикета" />
+                <ScalarProperty Name="Действие" ColumnName="Действие" />
+                <ScalarProperty Name="Идентификатор_пользователя" ColumnName="Идентификатор_пользователя" />
+                <ScalarProperty Name="Дата_и_время" ColumnName="Дата_и_время" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Категории_проблем">
+            <EntityTypeMapping TypeName="supportDBModel.Категории_проблем">
+              <MappingFragment StoreEntitySet="Категории_проблем">
+                <ScalarProperty Name="Идентификатор" ColumnName="Идентификатор" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Оборудование">
+            <EntityTypeMapping TypeName="supportDBModel.Оборудование">
+              <MappingFragment StoreEntitySet="Оборудование">
+                <ScalarProperty Name="Идентификатор" ColumnName="Идентификатор" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Серийный_номер" ColumnName="Серийный_номер" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+                <ScalarProperty Name="Дата_покупки" ColumnName="Дата_покупки" />
+                <ScalarProperty Name="Гарантийный_срок" ColumnName="Гарантийный_срок" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ответственные">
+            <EntityTypeMapping TypeName="supportDBModel.Ответственные">
+              <MappingFragment StoreEntitySet="Ответственные">
+                <ScalarProperty Name="Идентификатор" ColumnName="Идентификатор" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Контактная_информация" ColumnName="Контактная_информация" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Пользователи">
+            <EntityTypeMapping TypeName="supportDBModel.Пользователи">
+              <MappingFragment StoreEntitySet="Пользователи">
+                <ScalarProperty Name="Идентификатор" ColumnName="Идентификатор" />
+                <ScalarProperty Name="Имя" ColumnName="Имя" />
+                <ScalarProperty Name="Фамилия" ColumnName="Фамилия" />
+                <ScalarProperty Name="Должность" ColumnName="Должность" />
+                <ScalarProperty Name="Контактная_информация" ColumnName="Контактная_информация" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Помещения_и_оборудование">
+            <EntityTypeMapping TypeName="supportDBModel.Помещения_и_оборудование">
+              <MappingFragment StoreEntitySet="Помещения_и_оборудование">
+                <ScalarProperty Name="Идентификатор" ColumnName="Идентификатор" />
+                <ScalarProperty Name="Номер_помещения" ColumnName="Номер_помещения" />
+                <ScalarProperty Name="Идентификатор_оборудования" ColumnName="Идентификатор_оборудования" />
+                <ScalarProperty Name="Состояние" ColumnName="Состояние" />
+                <ScalarProperty Name="Дата_установки" ColumnName="Дата_установки" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Решения">
+            <EntityTypeMapping TypeName="supportDBModel.Решения">
+              <MappingFragment StoreEntitySet="Решения">
+                <ScalarProperty Name="Идентификатор" ColumnName="Идентификатор" />
+                <ScalarProperty Name="Идентификатор_тикета" ColumnName="Идентификатор_тикета" />
+                <ScalarProperty Name="Описание_решения" ColumnName="Описание_решения" />
+                <ScalarProperty Name="Дата_создания" ColumnName="Дата_создания" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Статусы_тикетов">
+            <EntityTypeMapping TypeName="supportDBModel.Статусы_тикетов">
+              <MappingFragment StoreEntitySet="Статусы_тикетов">
+                <ScalarProperty Name="Идентификатор" ColumnName="Идентификатор" />
+                <ScalarProperty Name="Идентификатор_тикета" ColumnName="Идентификатор_тикета" />
+                <ScalarProperty Name="Название" ColumnName="Название" />
+                <ScalarProperty Name="Описание" ColumnName="Описание" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Тикеты">
+            <EntityTypeMapping TypeName="supportDBModel.Тикеты">
+              <MappingFragment StoreEntitySet="Тикеты">
+                <ScalarProperty Name="Идентификатор" ColumnName="Идентификатор" />
+                <ScalarProperty Name="Идентификатор_пользователя" ColumnName="Идентификатор_пользователя" />
+                <ScalarProperty Name="Тема" ColumnName="Тема" />
+                <ScalarProperty Name="Идентификатор_проблемы" ColumnName="Идентификатор_проблемы" />
+                <ScalarProperty Name="Статус" ColumnName="Статус" />
+                <ScalarProperty Name="Приоритет" ColumnName="Приоритет" />
+                <ScalarProperty Name="Дата_создания" ColumnName="Дата_создания" />
+                <ScalarProperty Name="Дата_обновления" ColumnName="Дата_обновления" />
+                <ScalarProperty Name="Идентификатор_ответственного" ColumnName="Идентификатор_ответственного" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
